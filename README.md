@@ -1,6 +1,20 @@
-# README
+# Personality Predictor
+by Daniel Vega
 
-## Personality Predictor
+# Table of Contents
+- [Introduction](#Introduction)
+- [Strategy and Process](#Strategy and Process)
+- [Overview of the Data](#Overview of the Data)
+- [Exploratory Data Analysis](#Exploratory Data Analysis)
+- [Hypothesis Testing](#Hypothesis Testing)
+- [Wordclouds](#Wordclouds)
+- [Reflection and Next Steps](#Reflection and Next Steps)
+
+# Introduction
+
+The Myers–Briggs Type Indicator (MBTI) is an introspective self-report questionnaire with the purpose of indicating differing psychological preferences in how people perceive the world around them and make decisions.
+The MBTI was constructed by Katharine Cook Briggs and her daughter Isabel Briggs Myers. It is based on the conceptual theory proposed by Carl Jung, who had speculated that humans experience the world using four principal psychological functions – sensation, intuition, feeling, and thinking – and that one of these four functions is dominant for a person most of the time.
+
 
 
 This data was collected through the PersonalityCafe forum, as it provides a large selection of people and their MBTI personality type, as well as what they have written.
@@ -19,6 +33,15 @@ Learn more about the correlations and differences between each personality type.
 
 #### Motivation:
 I find psychology very interesting, I believe the more information people have, in this case about the personality type, the easier it will be for people to understand each other.
+
+
+# Strategy and Process
+- Overview of the Data
+- Exploratory Data Analysis
+- Hypothesis Testing
+- Visual Represantations
+
+# Overview of the Data
 
 ```python
 %matplotlib inline
