@@ -290,6 +290,6 @@ After transforming this image, using the pillow library and numpy, we can use it
 - Found "IN--" personalities are more common in the PersonalityCafe Forum.
 - Found that INTPs post more questions per post than INFJ and INFP
 - Created Word Clouds based on the frequancy of words used by each personality type.
-- Next step would be to run our PersonalityCafe dataset through an Natural Language Processing (NLP) model and see if we can predict each personality type based on posts.
+- Next step would be to run our PersonalityCafe dataset through a Natural Language Processing (NLP) model and see if we can predict each personality type based on posts.
 
 <a href="#Personality-Predictor">Back to top</a>
