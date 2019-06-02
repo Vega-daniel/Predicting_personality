@@ -270,7 +270,7 @@ After transforming this image, using the pillow library and numpy, we can use it
 |![](img/ENFP.png)|![](img/INFP.png)|
 |ENTJ|INTJ|
 |![](img/ENTJ.png)|![](img/INTJ.png)|
-|ENTP||INTP|
+|ENTP|INTP|
 |![](img/ENTP.png)|![](img/INTP.png)|
 |ESFJ|ISFJ|
 |![](img/ESFJ.png)|![](img/ISFJ.png)|
