@@ -8,8 +8,8 @@ by Daniel Vega
 - [Overview of the Data](#Overview-of-the-Data)
 - [Exploratory Data Analysis](#Exploratory-Data-Analysis)
 - [Hypothesis Testing](#Hypothesis-Testing)
-- [Wordclouds](#Wordclouds)
-- [Reflection and Next Steps](#Reflection-and-Next-Steps)
+- [Wordclouds](#WordClouds)
+- [Conclusion and Next Steps](#Conclusion-and-Next-Steps)
 
 # Introduction
 
@@ -73,15 +73,15 @@ This Data set comes from "MBTI Manual" published by CPP
 # Exploratory Data Analysis
 
 
-First I took a look at how much each personality type was represented in my data set in comparison to the population. 
+First let's take a look at how much each personality type was represented in the data set in comparison to the population. 
 
 ![](img/samplebarvpop.png)
 
-The results were interesting, the least common personality types seemed to be most represnted in our dataset. In order to compare apples to apples, I converted our sample count to a percentage and plotted them side by side.
+The results were interesting, the least common personality types seemed to be most represnted in the dataset. In order to compare apples to apples, let's convert our sample count to a percentage and plot them side by side.
 
 ![](img/samplevpop.png)
 
-Now we can make better sense of our data. It looks like IN-- personality types are highly represented in our sample.
+Now we can make better sense of the data. It looks like IN-- personality types are highly represented in this sample.
 
 The takeaway being IN-- personalities seem to have a stronger presence in this online forum.
 
@@ -95,7 +95,7 @@ The takeaway being IN-- personalities seem to have a stronger presence in this o
 
 Looking at the data above, we can see that having “IN--” in the personality increases the chances of being active on this forum. Let's test this:
 
-> $H_0$:"IN--" personalities have a higher likelyhood of being in this online forum
+> $H_0$:"IN--" personalities have an equal chance of being in this online forum
 
 
 | IN-- | PopulationFreq | SampleFreq | Count |
@@ -125,19 +125,19 @@ $$ P(\geq \text{ 2978 'IN--' observations} \mid \text{Null Hypothesis} ) $$
 ![](img/pvalue.png)
 
 
-#### Based on the data, we fail to reject the Null Hypothesis
+#### Based on the data (p-value was below 0), we reject the Null Hypothesis
 
 Let's take a look at all "IN--" personalities
 
-| Type | PopulationFreq | SampleFreq | Count | Questions/post |
+| Type | PopulationFreq | SampleFreq | Count | Questions/Post |
 |:---:|:---:|:---:|:---:|:---:|
 | INFP | 4.4 | 21.12 | 1832 | 0.20 |
-| 1NTP | 3.3 | 15.03 | 1304 | 0.22 |
+| INTP | 3.3 | 15.03 | 1304 | 0.22 |
 | INTJ | 2.1 | 12.58 | 1091 | 0.21 |
-| 1NFJ | 1.5 | 16.95 | 1470 | 0.21 |
+| INFJ | 1.5 | 16.95 | 1470 | 0.21 |
 
 
-Can we confidently say that INTPs ask more questions than the rest?
+INTPs seem to ask more questions per post. Can we confidently say that INTPs ask more questions than the rest?
 
 ![](img/ratios.png)
 
@@ -150,14 +150,14 @@ Can we confidently say that INTPs ask more questions than the rest?
 
 > $H_0$: there is no difference in the average amount of questions asked between INTP and INFP.
 
-Our question concerns population averages (is INTP's question average different than INTJ, INFJ and INFP).  Our measurements are sample averages, which, from the central limit theorem, we know are approximately normally distributed given the population average
+Our question concerns population averages (is INTP's question/post average different than INTJ, INFJ and INFP).  Our measurements are sample averages, which, from the central limit theorem, we know are approximately normally distributed given the population average
 
 $$ \text{Sample average of INTP's questions} \sim Normal \left( \mu_T, \sqrt{\frac{\sigma^2_T}{1304}} \right) $$
 $$ \text{Sample average of INTJ's questions} \sim Normal \left( \mu_J, \sqrt{\frac{\sigma^2_J}{1091}} \right) $$
 $$ \text{Sample average of INFJ's questions} \sim Normal \left( \mu_F, \sqrt{\frac{\sigma^2_F}{1470}} \right) $$
 $$ \text{Sample average of INFP's questions} \sim Normal \left( \mu_P, \sqrt{\frac{\sigma^2_P}{1832}} \right) $$
 
-If we are willing to assume that the Questions posted by INTP are independent from the other personalities, then we can compress the importnat information into one normal distribution
+If we are willing to assume that the Questions posted by INTP are independent from the other personalities, then we can compress the important information into one normal distribution
 
 $$ \text{Difference in sample averages} \sim Normal \left( \mu_T - \mu_J, \sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_J}{1091}} \right) $$
 $$ \text{Difference in sample averages} \sim Normal \left( \mu_T - \mu_F, \sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_F}{1470}} \right) $$
@@ -191,9 +191,9 @@ Now we still have a similar issue to the two sample test of population proportio
 >Welch Test Statistic(INTP v. INFP): 3.89
 
 
-Unfortuantely, this changes the distribution of the test statistic.  Instead of using a normal distribution, we must now use a **Student's t-distribution**, which accounts for the extra uncertenty in estimating the two new parameters.
+Unfortuantely, this changes the distribution of the test statistic.  Instead of using a normal distribution, we must now use a **Student's t-distribution**, which accounts for the extra uncertainty in estimating the two new parameters.
 
-The t-distribution always has mean $0$ and varaince $1$, and has one parameter, the **degrees of freedom**.  Smaller degrees of freedom have heavyer tails, with the distribution beoming more normal as the degrees of freedom gets larger.
+The t-distribution always has mean $0$ and varaince $1$, and has one parameter, the **degrees of freedom**.  Smaller degrees of freedom have heavyer tails, with the distribution becoming more normal as the degrees of freedom gets larger.
 
 The resulting application to our situation results in [Welch's t-test](https://en.wikipedia.org/wiki/Welch's_t-test).
 
@@ -208,7 +208,7 @@ The resulting application to our situation results in [Welch's t-test](https://e
 
 ![](img/pvalueregion.png)
 
-Based on the result we can see that our datasets are not normally distributed, this is a good lesson for next time. Check the distribution in the beginning before moving forward.
+Based on the result we can see that our datasets are not normally distributed, this is a good lesson for next time. Plot the distribution in the beginning before moving forward.
 
 
 #### This means we must use: *Mann-Whitney Signed Rank Test*
@@ -249,22 +249,47 @@ Based on our results:
 # WordClouds
 
 #### Now let's go back to the data and see what we can derive
-- Create a dictionary with all the observations of each Personality Type
+- Created a dictionary with all the observations of each Personality Type
  - After doing so it did not prove to be very useful
-- Create another dictionary with high frequency words by Personality Type
+- Created another dictionary with high frequency words by Personality Type
  - This can help us make some word clouds but first we need to clean our data
-- Create a list of the 30 most common words among all personality types
-- Remove the words in that list from our dataset
+- Created a list of the 30 most common words among all personality types
+- Removed the words in that list from our dataset
 
-Let's get a bit fancy, instead of the normal wordclouds, we can use a template for them, since we are talking about the mind, let's use a head.
+Let's get a bit fancy, instead of the default wordclouds, we can use a template for them, since we are talking about the mind, let's use a head.
 
-![](img/head2.png)
+<img src="img/head2.png" alt="drawing" width="250"/>
 
-After transforming this image (Using the pillow library) into something we can use. Here is what we get:
+After transforming this image, using the pillow library and numpy, we can use it to produce the following wordclouds.
 
-![](img/ENFJ.png)![](img/INFJ.png)
-![](img/ENFP.png)![](img/INFP.png)
-![](img/ENTJ.png)![](img/INTJ.png)
-![](img/ESFJ.png)![](img/ISFJ.png)
-![](img/ESFP.png)![](img/ISFP.png)
+|Extroverted|Introverted|
+|:---:|:---:|
+|ENFJ|INFJ|
+|![](img/ENFJ.png)|![](img/INFJ.png)|
+|ENFP|INFP|
+|![](img/ENFP.png)|![](img/INFP.png)|
+|ENTJ|INTJ|
+|![](img/ENTJ.png)|![](img/INTJ.png)|
+|ENTP||INTP|
+|![](img/ENTP.png)|![](img/INTP.png)|
+|ESFJ|ISFJ|
+|![](img/ESFJ.png)|![](img/ISFJ.png)|
+|ESFP|ISFP|
+|![](img/ESFP.png)|![](img/ISFP.png)|
+|ESTJ|ISTJ|
+|![](img/ESTJ.png)|![](img/ISTJ.png)|
+|ESTP|ISTP|
+|![](img/ESTP.png)|![](img/ISTP.png)|
 
+<a href="#Personality-Predictor">Back to top</a>
+
+
+# Conclusion and Next Steps
+
+- Took the datasets and compared the sample agianst the population
+- Found "IN--" personalities are more common in the PersonalityCafe Forum.
+- Found that INTPs post more questions per post than INFJ and INFP
+- Created Word Clouds based on the frequancy of words used by each personality type.
+- Next step would be to run our PersonalityCafe dataset through an Natural Language Processing (NLP) model and see if we can predict each personality type based on posts.
+
+<a href="#Personality-Predictor">Back to top</a>
