@@ -1,4 +1,4 @@
-# Personality Predictor
+# Personality Exploritory Data Analysis
 by Daniel Vega
 
 
@@ -27,7 +27,7 @@ Learn more about the correlations and differences between each personality type.
 #### Motivation:
 I find psychology very interesting, I believe the more information people have, in this case about the personality type, the easier it will be for people to understand each other.
 
-<a href="#Personality-Predictor">Back to top</a>
+<a href="#Personality-Exploritory-Data-Analysis">Back to top</a>
 
 
 # Strategy and Process
@@ -67,7 +67,7 @@ This Data set comes from "MBTI Manual" published by CPP
 | 3 | ISFP | 8.8% |
 | 4 | ESTJ | 8.7% |
 
- <a href="#Personality-Predictor">Back to top</a>
+ <a href="#Personality-Exploritory-Data-Analysis">Back to top</a>
 
 
 # Exploratory Data Analysis
@@ -85,7 +85,7 @@ Now we can make better sense of the data. It looks like IN-- personality types a
 
 The takeaway being IN-- personalities seem to have a stronger presence in this online forum.
 
-<a href="#Personality-Predictor">Back to top</a>
+<a href="#Personality-Exploritory-Data-Analysis">Back to top</a>
 
 
 # Hypothesis Testing
@@ -243,7 +243,7 @@ Based on our results:
 
 > we reject the third Null Hypothesis
 
-<a href="#Personality-Predictor">Back to top</a>
+<a href="#Personality-Exploritory-Data-Analysis">Back to top</a>
 
 
 # WordClouds
@@ -281,7 +281,7 @@ After transforming this image, using the pillow library and numpy, we can use it
 |ESTP|ISTP|
 |![](img/ESTP.png)|![](img/ISTP.png)|
 
-<a href="#Personality-Predictor">Back to top</a>
+<a href="#Personality-Exploritory-Data-Analysis">Back to top</a>
 
 
 # Conclusion and Next Steps
@@ -292,4 +292,4 @@ After transforming this image, using the pillow library and numpy, we can use it
 - Created Word Clouds based on the frequancy of words used by each personality type.
 - Next step would be to run our PersonalityCafe dataset through a Natural Language Processing (NLP) model and see if we can predict each personality type based on posts.
 
-<a href="#Personality-Predictor">Back to top</a>
+<a href="#Personality-Exploritory-Data-Analysis">Back to top</a>
