@@ -6,8 +6,11 @@ import pandas as pd
 from nltk.stem.snowball import SnowballStemmer
 from nltk.corpus import stopwords
 import string
-import databricks.koalas as ks
+import re
+from bs4 import BeautifulSoup
 
+REPLACE_BY_SPACE_RE = re.compile('[/(){}\\[\]\|?@,;]')
+BAD_SYMBOLS_RE = re.compile('[^0-9a-z #+_]')
 punctuation_ = set(string.punctuation)
 stopwords_ = set(stopwords.words('english'))
 
@@ -32,7 +35,17 @@ def snow_stem(lst):
     snowball = SnowballStemmer('english')
     return [snowball.stem(word) for word in lst]
 
-def pipeline(df):
+def rm_punc(sent):
+	return [w for w in sent if not w in punctuation_]
+
+def clean_text(text):
+    text = BeautifulSoup(text, "lxml").text # HTML decoding
+    text = REPLACE_BY_SPACE_RE.sub(' ', text) # replace REPLACE_BY_SPACE_RE symbols by space in text
+    text = BAD_SYMBOLS_RE.sub('', text) # delete symbols which are in BAD_SYMBOLS_RE from text
+    text = ' '.join(word for word in text.split() if word not in stopwords_)
+    return text
+
+def clean_df(df):
 	"""Normalize the data, change all letters to lower case, split into 
 	sentences,remove website links, tokenize words into a new dataframe then:
 	filter punctuation, filter stopwords, stemminize
@@ -45,30 +58,13 @@ def pipeline(df):
 	word = Pandas DataFrames
 	______________
 	"""
-	df.posts = df.posts.apply(lambda x: remove_accents(x).lower())
-	df = pd.DataFrame((df.type,df.posts.apply(lambda x: x.split('|||')))).T
-	df.posts = df.posts.apply(lambda x: remove_link(x))
-	df.posts = df.posts.apply(lambda x: wt(x))
-	df.posts = df.posts.apply(lambda x: flatten(x))
-	df.posts = df.posts.apply(lambda x: filter_tokens(x))
-	df.posts = df.posts.apply(lambda x: snow_stem(x))
-	return df
-
-def pipeline_sent(df):
-	"""Normalize the data, change all letters to lower case, split into 
-	sentences,remove website links then join into one string.
-
-	INPUT
-	--------------
-	df = Pandas DataFrame
-
-	OUTPUT
-	--------------
-	df = Pandas DataFrames
-	______________
-	"""
-	df.posts = df.posts.apply(lambda x: remove_accents(x).lower())
-	df = pd.DataFrame((df.type,df.posts.apply(lambda x: x.split('|||')))).T
-	df.posts = df.posts.apply(lambda x: remove_link(x))
-	df.posts = df.posts.apply(lambda x: '. '.join(x))
-	return df
+	newdf = df.copy()
+	newdf.posts = newdf.posts.apply(lambda x: remove_accents(x).lower())
+	newdf = pd.DataFrame((newdf.type,newdf.posts.apply(lambda x: x.split('|||')))).T
+	newdf.posts = newdf.posts.apply(lambda x: remove_link(x))
+	newdf.posts = newdf.posts.apply(lambda x: wt(x))
+	newdf.posts = newdf.posts.apply(lambda x: flatten(x))
+	newdf.posts = newdf.posts.apply(lambda x: snow_stem(x))
+	newdf.posts = newdf.posts.apply(lambda x: ' '.join(x))
+	newdf.posts = newdf.posts.apply(lambda x: clean_text(x))
+	return newdf
