@@ -1,4 +1,4 @@
-#Functions file for personality prediction file
+# Functions file for personality prediction file
 
 import unicodedata
 from nltk.tokenize import word_tokenize
@@ -25,15 +25,15 @@ def filter_tokens(sent):
 def remove_link(sent):
     return [s for s in sent if 'http' not in s]
 
-def wt(lst):
-    return [word_tokenize(sent) for sent in lst]
+def wt(text):
+    return [word_tokenize(sent) for sent in text.split()]
 
 def flatten(lst):
     return [item for sublist in lst for item in sublist]
 
-def snow_stem(lst):
+def snow_stem(text):
     snowball = SnowballStemmer('english')
-    return [snowball.stem(word) for word in lst]
+    return [snowball.stem(word) for word in text]
 
 def rm_punc(sent):
 	return [w for w in sent if not w in punctuation_]
@@ -62,9 +62,10 @@ def clean_df(df):
 	newdf.posts = newdf.posts.apply(lambda x: remove_accents(x).lower())
 	newdf = pd.DataFrame((newdf.type,newdf.posts.apply(lambda x: x.split('|||')))).T
 	newdf.posts = newdf.posts.apply(lambda x: remove_link(x))
+	newdf.posts = newdf.posts.apply(lambda x: ' '.join(x))
+	newdf.posts = newdf.posts.apply(lambda x: clean_text(x))
 	newdf.posts = newdf.posts.apply(lambda x: wt(x))
 	newdf.posts = newdf.posts.apply(lambda x: flatten(x))
 	newdf.posts = newdf.posts.apply(lambda x: snow_stem(x))
 	newdf.posts = newdf.posts.apply(lambda x: ' '.join(x))
-	newdf.posts = newdf.posts.apply(lambda x: clean_text(x))
 	return newdf

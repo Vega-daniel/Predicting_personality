@@ -7,7 +7,9 @@ by Daniel Vega
 - [Strategy and Process](#Strategy-and-Process)
 - [Overview of the Data](#Overview-of-the-Data)
 - [Exploratory Data Analysis](#Exploratory-Data-Analysis)
-- [Hypothesis Testing](#Hypothesis-Testing)
+- [Data Pipeline](#Data-Pipeline)
+- [Model Selection](#Model-Selection)
+- [Deep Learning](#Deep-Learning)
 - [Wordclouds](#WordClouds)
 - [Conclusion and Next Steps](#Conclusion-and-Next-Steps)
 
@@ -22,10 +24,12 @@ The MBTI was constructed by Katharine Cook Briggs and her daughter Isabel Briggs
 
 
 #### Goal:
-Learn more about the correlations and differences between each personality type. Derive visuals and compare the personality types against each other.
+- Learn more about the correlations and differences between each personality type. 
+- Derive visuals and compare the personality types against each other. 
+- Given sufficient text, predict the personality type of the individual. 
 
 #### Motivation:
-I find psychology very interesting, I believe the more information people have, in this case about the personality type, the easier it will be for people to understand each other.
+I find psychology very interesting, I believe the more information people have, in this case about the personality type, the easier it will be for people to understand each other. Not to mention once we understand an individual's personality, we can help create an environment where they will succeed.
 
 <a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
 
@@ -33,7 +37,8 @@ I find psychology very interesting, I believe the more information people have, 
 # Strategy and Process
 - Overview of the Data
 - Exploratory Data Analysis
-- Hypothesis Testing
+- Emotional Analysis
+- Model Selection
 - Visual Represantations
 
 
@@ -81,169 +86,262 @@ The results were interesting, the least common personality types seemed to be mo
 
 ![](img/samplevpop.png)
 
-Now we can make better sense of the data. It looks like IN-- personality types are highly represented in this sample.
-
-The takeaway being IN-- personalities seem to have a stronger presence in this online forum.
+For further EDA please look at the summary [here](ExploratoryDataAnalysis.md)
 
 <a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
 
 
-# Hypothesis Testing
-
-
-
-
-Looking at the data above, we can see that having “IN--” in the personality increases the chances of being active on this forum. Let's test this:
-
-> $H_0$:"IN--" personalities have an equal chance of being in this online forum
-
-
-| IN-- | PopulationFreq | SampleFreq | Count |
-|:---:|:---:|:---:|:---:|
-| 0 | 89 | 34.33 | 2978 |
-| 1 | 11 | 65.67 | 5697 |
-
-
-We have a total of 8675 users, and 2978 of them are "IN--" we will test our hypothesis below, we will reject our hypothesis if we get a p-value greater than 0.05
-
-$$ \text{# of "IN--"} \approx Binomial(8675, 0.11) $$
-
-The central limit theorem tells us that a binomial with large $N$ is well approximated by a Normal distribution with the appropriate mean and varaince. Let's take a look at both plots belows.
-
-$$ Binomial(8675, 0.11) \approx N(8675 \times 0.11, \sqrt{8675 \times 0.11 \times 0.89}) $$
-
-
-![](img/distributions.png)
-
-
-Let's continue with the Normal Distribution
-
-The p-value for this is:
-
-$$ P(\geq \text{ 2978 'IN--' observations} \mid \text{Null Hypothesis} ) $$
-
-![](img/pvalue.png)
-
-
-#### Based on the data (p-value was below 0), we reject the Null Hypothesis
-
-Let's take a look at all "IN--" personalities
-
-| Type | PopulationFreq | SampleFreq | Count | Questions/Post |
-|:---:|:---:|:---:|:---:|:---:|
-| INFP | 4.4 | 21.12 | 1832 | 0.20 |
-| INTP | 3.3 | 15.03 | 1304 | 0.22 |
-| INTJ | 2.1 | 12.58 | 1091 | 0.21 |
-| INFJ | 1.5 | 16.95 | 1470 | 0.21 |
-
-
-INTPs seem to ask more questions per post. Can we confidently say that INTPs ask more questions than the rest?
-
-![](img/ratios.png)
-
-
-#### Let's take a skeptical stance, and clearly state this Hypothesis.
-
-> $H_0$: there is no difference in the average amount of questions asked between INTP and INTJ.
-
-> $H_0$: there is no difference in the average amount of questions asked between INTP and INFJ.
-
-> $H_0$: there is no difference in the average amount of questions asked between INTP and INFP.
-
-Our question concerns population averages (is INTP's question/post average different than INTJ, INFJ and INFP).  Our measurements are sample averages, which, from the central limit theorem, we know are approximately normally distributed given the population average
-
-$$ \text{Sample average of INTP's questions} \sim Normal \left( \mu_T, \sqrt{\frac{\sigma^2_T}{1304}} \right) $$
-$$ \text{Sample average of INTJ's questions} \sim Normal \left( \mu_J, \sqrt{\frac{\sigma^2_J}{1091}} \right) $$
-$$ \text{Sample average of INFJ's questions} \sim Normal \left( \mu_F, \sqrt{\frac{\sigma^2_F}{1470}} \right) $$
-$$ \text{Sample average of INFP's questions} \sim Normal \left( \mu_P, \sqrt{\frac{\sigma^2_P}{1832}} \right) $$
-
-If we are willing to assume that the Questions posted by INTP are independent from the other personalities, then we can compress the important information into one normal distribution
-
-$$ \text{Difference in sample averages} \sim Normal \left( \mu_T - \mu_J, \sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_J}{1091}} \right) $$
-$$ \text{Difference in sample averages} \sim Normal \left( \mu_T - \mu_F, \sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_F}{1470}} \right) $$
-$$ \text{Difference in sample averages} \sim Normal \left( \mu_T - \mu_P, \sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_P}{1832}} \right) $$
-
-Under the assumption of the null hypothesis
-
-$$ \text{Difference in sample averages} \sim Normal \left( 0, \sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_J}{1091}} \right) $$
-$$ \text{Difference in sample averages} \sim Normal \left( 0, \sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_F}{1470}} \right) $$
-$$ \text{Difference in sample averages} \sim Normal \left( 0, \sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_P}{1832}} \right) $$
-
-
-In cases where we have to independently estiamte the variance of a normal distribution from the same samples we are testing, this estimation of the variance contributes to uncertenty in our test.  This means that the Normal distribution is then **too precise** to use as a conservative estimate of the p-value.
-
-
-### Welch's t-test
-
-To recify the problem, we first convert to a sample statistic whose variance is expected to be $1$
-
-$$ \frac{\text{Difference in sample averages}}{\sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_J}{1091}}} $$
-$$ \frac{\text{Difference in sample averages}}{\sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_F}{1470}}} $$
-$$ \frac{\text{Difference in sample averages}}{\sqrt{\frac{\sigma^2_T}{1304} + \frac{\sigma^2_P}{1832}}} $$
-
-
-Now we still have a similar issue to the two sample test of population proportions, we do not know the population varainces in the denominator of the formula, so our only recourse is to substitute in the sample variances
-
->Welch Test Statistic(INTP v. INTJ): 1.17
-
->Welch Test Statistic(INTP v. INFJ): 2.35
-
->Welch Test Statistic(INTP v. INFP): 3.89
-
-
-Unfortuantely, this changes the distribution of the test statistic.  Instead of using a normal distribution, we must now use a **Student's t-distribution**, which accounts for the extra uncertainty in estimating the two new parameters.
-
-The t-distribution always has mean $0$ and varaince $1$, and has one parameter, the **degrees of freedom**.  Smaller degrees of freedom have heavyer tails, with the distribution becoming more normal as the degrees of freedom gets larger.
-
-The resulting application to our situation results in [Welch's t-test](https://en.wikipedia.org/wiki/Welch's_t-test).
-
-> Degrees of Freedom for Welch's Test: 2312.08
-
->Degrees of Freedom for Welch's Test: 2751.33
-
->Degrees of Freedom for Welch's Test: 2678.67
-
-
-![](img/welchttest.png)
-
-![](img/pvalueregion.png)
-
-Based on the result we can see that our datasets are not normally distributed, this is a good lesson for next time. Plot the distribution in the beginning before moving forward.
-
-
-#### This means we must use: *Mann-Whitney Signed Rank Test*
-Let us rephrase our null hypothesis to what we started with:
-
-> $H_0$: INTPs ratio of questions to posts are equally likely to INTJs. i.e
-  
-  $$P(\text{INTPs questions/post} > \text{INTJs questions/post}) = 0.5$$
-
-> $H_0$: INTPs ratio of questions to posts are equally likely to INFJs. i.e
-  
-  $$P(\text{INTPs questions/post} > \text{INFJs questions/post}) = 0.5$$
-
-> $H_0$: INTPs ratio of questions to posts are equally likely to INFPs. i.e  
-  
-  $$P(\text{INTPs questions/post} > \text{INFPs questions/post}) = 0.5$$
-
-We will set a rejection threshold of **0.01**
-
->p-value for INTP > INTJ: 0.07070
-
->p-value for INTP > INFJ: 0.00052
-
->p-value for INTP > INFP: 0.00002
-
-
-Based on our results:
-
-> we fail to reject the first Null Hypothesis
-
-> we reject the second Null Hypothesis
-
-> we reject the third Null Hypothesis
-
-<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+# Data Pipeline
+
+
+Let's create a data pipeline, it will aim to do the following:
+- Standardize the text to ASCII
+- Remove weblinks
+- Tokenize the words
+- Use a stemmer on the words
+- Remove HTML decoding
+- Remove punctuation
+- Remove stopwords
+
+
+# Model Selection
+
+
+Here we go through different machine learning algorithms in order to find a model that can predict the personalities. Random would be 1/16 or 0.0625. That is really low, so for our model let's aim to achiece results higher than 50%. The code for this can be found [here](NLP_Models.ipynb)
+
+We will use the following models:
+- [Random Forest](#Random-Forest-Classifier)
+- [Gradient Boosting Classifier](#Gradient-Boosting-Classifier)
+- [Naive Bayes](#Naive-Bayes)
+- [Stochastic Gradient Descent](#Stochastic-Gradient-Descent)
+- [Logistic Regression](#Logistic-Regression)
+
+
+## Random Forest Classifier
+
+    RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=5, max_features='auto', max_leaf_nodes=None,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, n_estimators=1000, n_jobs=-1,
+            oob_score=True, random_state=29, verbose=0, warm_start=False)
+            
+    oob_score_ = 0.3614985590778098
+
+
+## Gradient Boosting Classifier
+
+    GradientBoostingClassifier(criterion='friedman_mse', init=None,
+              learning_rate=0.01, loss='deviance', max_depth=5,
+              max_features=None, max_leaf_nodes=None,
+              min_impurity_decrease=0.0, min_impurity_split=None,
+              min_samples_leaf=1, min_samples_split=2,
+              min_weight_fraction_leaf=0.0, n_estimators=100,
+              n_iter_no_change=None, presort='auto', random_state=29,
+              subsample=1.0, tol=0.0001, validation_fraction=0.1,
+              verbose=0, warm_start=False)
+              
+    Accuracy_score = 0.6273530541682674
+    
+#### This is pretty good, we change our max_depth to 3 and try again.
+
+    GradientBoostingClassifier(criterion='friedman_mse', init=None,
+              learning_rate=0.01, loss='deviance', max_depth=3,
+              max_features=None, max_leaf_nodes=None,
+              min_impurity_decrease=0.0, min_impurity_split=None,
+              min_samples_leaf=1, min_samples_split=2,
+              min_weight_fraction_leaf=0.0, n_estimators=100,
+              n_iter_no_change=None, presort='auto', random_state=29,
+              subsample=1.0, tol=0.0001, validation_fraction=0.1,
+              verbose=0, warm_start=False)
+              
+    Accuracy_score = 0.650787552823665
+    
+#### Here is a summary of the results:
+
+        precision    recall  f1-score   support
+
+            ENFJ       0.52      0.28      0.37        53
+            ENFP       0.64      0.56      0.60       195
+            ENTJ       0.77      0.38      0.50        80
+            ENTP       0.71      0.53      0.61       221
+            ESFJ       0.50      0.38      0.43         8
+            ESFP       0.60      0.30      0.40        10
+            ESTJ       0.50      0.27      0.35        11
+            ESTP       0.67      0.38      0.48        32
+            INFJ       0.65      0.72      0.69       424
+            INFP       0.61      0.84      0.71       571
+            INTJ       0.65      0.59      0.62       321
+            INTP       0.68      0.74      0.71       391
+            ISFJ       0.57      0.37      0.45        57
+            ISFP       0.67      0.42      0.52        83
+            ISTJ       0.62      0.48      0.54        54
+            ISTP       0.68      0.51      0.58        92
+
+       micro avg       0.65      0.65      0.65      2603
+       macro avg       0.63      0.48      0.53      2603
+    weighted avg       0.65      0.65      0.64      2603
+
+
+## Naive Bayes
+
+#### This algorithm was not a very good choice for our data and the results show it:
+        
+            Accuracy = 0.22051479062620052
+            
+                  precision    recall  f1-score   support
+
+            ENFJ       0.00      0.00      0.00        53
+            ENFP       0.00      0.00      0.00       195
+            ENTJ       0.00      0.00      0.00        80
+            ENTP       0.00      0.00      0.00       221
+            ESFJ       0.00      0.00      0.00         8
+            ESFP       0.00      0.00      0.00        10
+            ESTJ       0.00      0.00      0.00        11
+            ESTP       0.00      0.00      0.00        32
+            INFJ       0.43      0.01      0.01       424
+            INFP       0.22      1.00      0.36       571
+            INTJ       0.00      0.00      0.00       321
+            INTP       0.00      0.00      0.00       391
+            ISFJ       0.00      0.00      0.00        57
+            ISFP       0.00      0.00      0.00        83
+            ISTJ       0.00      0.00      0.00        54
+            ISTP       0.00      0.00      0.00        92
+
+       micro avg       0.22      0.22      0.22      2603
+       macro avg       0.04      0.06      0.02      2603
+    weighted avg       0.12      0.22      0.08      2603
+    
+
+
+## Stochastic Gradient Descent
+
+#### The accuracy here is the highest so far:
+
+    Accuracy = 0.6699961582789089
+    
+                  precision    recall  f1-score   support
+
+            ENFJ       0.75      0.17      0.28        53
+            ENFP       0.66      0.60      0.63       195
+            ENTJ       0.74      0.36      0.49        80
+            ENTP       0.70      0.57      0.63       221
+            ESFJ       0.67      0.25      0.36         8
+            ESFP       0.50      0.10      0.17        10
+            ESTJ       1.00      0.09      0.17        11
+            ESTP       0.64      0.22      0.33        32
+            INFJ       0.65      0.77      0.70       424
+            INFP       0.69      0.85      0.76       571
+            INTJ       0.66      0.65      0.66       321
+            INTP       0.66      0.80      0.72       391
+            ISFJ       0.74      0.35      0.48        57
+            ISFP       0.66      0.37      0.48        83
+            ISTJ       0.76      0.30      0.43        54
+            ISTP       0.66      0.57      0.61        92
+
+       micro avg       0.67      0.67      0.67      2603
+       macro avg       0.70      0.44      0.49      2603
+    weighted avg       0.68      0.67      0.65      2603
+    
+#### Let's also look at the confusion matrix:
+
+    [[  9   5   0   3   0   0   0   0  11  16   1   4   0   0   1   3]
+     [  0 117   2   5   0   0   0   1  25  23  13   7   0   1   0   1]
+     [  2   7  29   6   0   0   0   1   4   7   9  12   1   1   0   1]
+     [  0  10   2 126   0   0   0   0  19  20  18  20   0   6   0   0]
+     [  0   0   0   0   2   0   0   0   0   1   0   4   1   0   0   0]
+     [  0   2   0   1   1   1   0   0   2   1   0   2   0   0   0   0]
+     [  0   0   0   4   0   0   1   0   1   4   1   0   0   0   0   0]
+     [  0   1   1   4   0   0   0   7   6   1   1   4   1   0   0   6]
+     [  0   6   2   8   0   0   0   0 327  51  13  15   1   0   0   1]
+     [  1   9   1  10   0   0   0   0  18 484  13  23   0   4   2   6]
+     [  0   3   1   2   0   1   0   0  37  26 208  38   1   1   1   2]
+     [  0   3   1   7   0   0   0   1  21  26  14 314   0   0   0   4]
+     [  0   4   0   0   0   0   0   0  12   6   6   8  20   1   0   0]
+     [  0   2   0   0   0   0   0   0  10  25   4   7   1  31   1   2]
+     [  0   6   0   0   0   0   0   0   5  10   8   7   1   0  16   1]
+     [  0   3   0   3   0   0   0   1   7   5   5  14   0   2   0  52]]
+
+
+## Logistic Regression
+
+#### It did not out perform stochastic gradient descent. Here is the summary:
+
+    Accuracy = 0.6300422589320015
+    
+                  precision    recall  f1-score   support
+
+            ENFJ       0.69      0.45      0.55        53
+            ENFP       0.60      0.59      0.60       195
+            ENTJ       0.72      0.42      0.54        80
+            ENTP       0.67      0.55      0.60       221
+            ESFJ       0.50      0.38      0.43         8
+            ESFP       0.50      0.10      0.17        10
+            ESTJ       0.40      0.18      0.25        11
+            ESTP       0.82      0.28      0.42        32
+            INFJ       0.60      0.70      0.65       424
+            INFP       0.66      0.78      0.71       571
+            INTJ       0.59      0.58      0.58       321
+            INTP       0.63      0.71      0.67       391
+            ISFJ       0.67      0.46      0.54        57
+            ISFP       0.55      0.37      0.45        83
+            ISTJ       0.71      0.37      0.49        54
+            ISTP       0.63      0.51      0.56        92
+
+       micro avg       0.63      0.63      0.63      2603
+       macro avg       0.62      0.47      0.51      2603
+    weighted avg       0.63      0.63      0.62      2603
+
+
+# Deep Learning
+
+#### Let's create a Neural Network and see if we can get better results. The code for this can be found [here](Deep_Learning.ipynb)
+
+    Accuracy = 0.9865539761813292
+    
+#### This is very impressive accuracy, let's look at the summary.
+    
+                  precision    recall  f1-score   support
+
+               0       1.00      1.00      1.00        54
+               1       1.00      1.00      1.00       214
+               2       1.00      1.00      1.00        77
+               3       1.00      1.00      1.00       186
+               4       0.00      0.00      0.00        11
+               5       0.00      0.00      0.00        15
+               6       0.00      0.00      0.00         9
+               7       1.00      1.00      1.00        21
+               8       1.00      1.00      1.00       425
+               9       0.98      1.00      0.99       538
+              10       0.96      1.00      0.98       327
+              11       0.97      1.00      0.99       408
+              12       1.00      1.00      1.00        53
+              13       1.00      1.00      1.00        88
+              14       1.00      1.00      1.00        69
+              15       1.00      1.00      1.00       108
+
+       micro avg       0.99      0.99      0.99      2603
+       macro avg       0.81      0.81      0.81      2603
+    weighted avg       0.97      0.99      0.98      2603
+    
+#### Let's also take a look at the confusion matrix:
+
+    [[ 54   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
+     [  0 214   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
+     [  0   0  77   0   0   0   0   0   0   0   0   0   0   0   0   0]
+     [  0   0   0 186   0   0   0   0   0   0   0   0   0   0   0   0]
+     [  0   0   0   0   0   0   0   0   0   0   0  11   0   0   0   0]
+     [  0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0]
+     [  0   0   0   0   0   0   0   0   0   9   0   0   0   0   0   0]
+     [  0   0   0   0   0   0   0  21   0   0   0   0   0   0   0   0]
+     [  0   0   0   0   0   0   0   0 425   0   0   0   0   0   0   0]
+     [  0   0   0   0   0   0   0   0   0 538   0   0   0   0   0   0]
+     [  0   0   0   0   0   0   0   0   0   0 327   0   0   0   0   0]
+     [  0   0   0   0   0   0   0   0   0   0   0 408   0   0   0   0]
+     [  0   0   0   0   0   0   0   0   0   0   0   0  53   0   0   0]
+     [  0   0   0   0   0   0   0   0   0   0   0   0   0  88   0   0]
+     [  0   0   0   0   0   0   0   0   0   0   0   0   0   0  69   0]
+     [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 108]]
 
 
 # WordClouds
