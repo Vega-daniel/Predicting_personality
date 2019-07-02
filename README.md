@@ -449,6 +449,10 @@ After transforming this image, using the pillow library and numpy, we can use it
 - Built a Neural Network which improved gave great accuracy but was overfit to the over represnted classes
 - Performed emotional analysis for each personality type
 - Created Word Clouds based on the frequancy of words used by each personality type.
-- Next step would be to 
+- Next step would be to gather data from another place like twitter or facebook and see if we can predict personalities based on that text
 
 <a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+
+```python
+
+```
