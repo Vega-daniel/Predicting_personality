@@ -397,8 +397,27 @@ We will use the following models:
 
 # Emotional Analysis
 
-Next let's dive into the emotions by each personality type. The code for this can be found [here](Emotional_Analysis).
-![](img/emotionsByPersonality.png)
+Next let's dive into the emotions by each personality type. The code for this can be found [here](Emotional_Analysis.ipynb).
+![](img/emoByType.png)
+
+|Extroverted|Introverted|
+|:---:|:---:|
+|ENFJ|INFJ|
+|![](img/emoINFJ.png)|![](img/emoINFJ.png)|
+|ENFP|INFP|
+|![](img/emoENFP.png)|![](img/emoINFP.png)|
+|ENTJ|INTJ|
+|![](img/emoENTJ.png)|![](img/emoINTJ.png)|
+|ENTP|INTP|
+|![](img/emoENTP.png)|![](img/emoINTP.png)|
+|ESFJ|ISFJ|
+|![](img/emoESFJ.png)|![](img/emoISFJ.png)|
+|ESFP|ISFP|
+|![](img/emoESFP.png)|![](img/emoISFP.png)|
+|ESTJ|ISTJ|
+|![](img/emoESTJ.png)|![](img/emoISTJ.png)|
+|ESTP|ISTP|
+|![](img/emoESTP.png)|![](img/emoISTP.png)|
 
 <a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
 
@@ -406,8 +425,6 @@ Next let's dive into the emotions by each personality type. The code for this ca
 # WordClouds
 
 #### Now let's go back to the data and see what we can derive
-- Created a dictionary with all the observations of each Personality Type
- - After doing so it did not prove to be very useful
 - Created another dictionary with high frequency words by Personality Type
  - This can help us make some word clouds but first we need to clean our data
 - Created a list of the 30 most common words among all personality types
