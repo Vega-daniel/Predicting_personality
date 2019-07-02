@@ -400,25 +400,6 @@ We will use the following models:
 Next let's dive into the emotions by each personality type. The code for this can be found [here](Emotional_Analysis.ipynb).
 ![](img/emoByType.png)
 
-|Extroverted|Introverted|
-|:---:|:---:|
-|ENFJ|INFJ|
-|![](img/emoINFJ.png)|![](img/emoINFJ.png)|
-|ENFP|INFP|
-|![](img/emoENFP.png)|![](img/emoINFP.png)|
-|ENTJ|INTJ|
-|![](img/emoENTJ.png)|![](img/emoINTJ.png)|
-|ENTP|INTP|
-|![](img/emoENTP.png)|![](img/emoINTP.png)|
-|ESFJ|ISFJ|
-|![](img/emoESFJ.png)|![](img/emoISFJ.png)|
-|ESFP|ISFP|
-|![](img/emoESFP.png)|![](img/emoISFP.png)|
-|ESTJ|ISTJ|
-|![](img/emoESTJ.png)|![](img/emoISTJ.png)|
-|ESTP|ISTP|
-|![](img/emoESTP.png)|![](img/emoISTP.png)|
-
 <a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
 
 
