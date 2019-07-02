@@ -10,6 +10,7 @@ by Daniel Vega
 - [Data Pipeline](#Data-Pipeline)
 - [Model Selection](#Model-Selection)
 - [Deep Learning](#Deep-Learning)
+- [Emotional Analysis](#Emotional-Analysis)
 - [Wordclouds](#WordClouds)
 - [Conclusion and Next Steps](#Conclusion-and-Next-Steps)
 
@@ -93,7 +94,7 @@ For further EDA please look at the summary [here](ExploratoryDataAnalysis.md)
 
 # Data Pipeline
 
-
+<!-- #region -->
 Let's create a data pipeline, it will aim to do the following:
 - Standardize the text to ASCII
 - Remove weblinks
@@ -103,6 +104,52 @@ Let's create a data pipeline, it will aim to do the following:
 - Remove punctuation
 - Remove stopwords
 
+The code to do this can be found [here](src/personality.py)
+
+We make a pickle file that creates a list of words as seen below:
+- These have been standardized, tokenized, stemmed and punctuations/stopwords have been removed
+        
+|index|type|posts|
+|:---:|:---:|:---:|
+|0|INFJ|[life-chang, experi, life, may, perc, experi, ...|
+|1|ENTP|['m, find, lack, post, alarm, sex, bore, 's, p...|
+|2|INTP|[cours, say, know, 's, bless, curs, absolut, p...|
+|3|INTJ|[dear, intp, enjoy, convers, day, esoter, gab,...|
+|4|ENTJ|[you, re, fire, 's, anoth, silli, misconcept, ...|
+
+We also make a pickle file of the strings standardized, and stemmed as seen below:
+
+|index|type|posts|
+|:---:|:---:|:---:|
+|0|INFJ|what has been the most life-chang experi in yo...|
+|1|ENTP|i 'm find the lack of me in these post veri al...|
+|2|INTP|of cours to which i say i know that 's my bles...|
+|3|INTJ|dear intp i enjoy our convers the other day es...|
+|4|ENTJ|you re fire that 's anoth silli misconcept tha...|
+
+Next we create another pickle file where the full process has been applied:
+
+|index|type|posts|
+|:---:|:---:|:---:|
+|0|INFJ|lifechang experi life may perc experi immers h...|
+|1|ENTP|im find lack post alarm sex bore posit often e...|
+|2|INTP|cours say know that bless curs absolut posit b...|
+|3|INTJ|dear intp enjoy convers day esoter gab natur u...|
+|4|ENTJ|your fire that anoth silli misconcept approach...|
+
+Finally, we use the [Emotions Lexicon](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm), which was created by the National Research Council Canada, to derive emotions from the text and store that in a pickle file. The code for this can be found [here](src/emotions.py):
+
+|emotion|anger|anticipation|disgust|fear|joy|negative|positive|sadness|surprise|trust|
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+|0|3|22|2|3|11|14|22|4|6|13|
+|1|14|23|8|15|21|24|37|12|17|18|
+|2|7|26|5|12|26|17|42|9|13|31|
+|3|6|14|4|7|6|14|30|7|2|20|
+|4|17|30|15|13|23|29|43|14|15|24|
+
+
+<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<!-- #endregion -->
 
 # Model Selection
 
@@ -291,6 +338,8 @@ We will use the following models:
        micro avg       0.63      0.63      0.63      2603
        macro avg       0.62      0.47      0.51      2603
     weighted avg       0.63      0.63      0.62      2603
+    
+<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
 
 
 # Deep Learning
@@ -343,6 +392,16 @@ We will use the following models:
      [  0   0   0   0   0   0   0   0   0   0   0   0   0   0  69   0]
      [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 108]]
 
+<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+
+
+# Emotional Analysis
+
+Next let's dive into the emotions by each personality type. The code for this can be found [here](Emotional_Analysis).
+![](img/emotionsByPersonality.png)
+
+<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+
 
 # WordClouds
 
@@ -384,10 +443,12 @@ After transforming this image, using the pillow library and numpy, we can use it
 
 # Conclusion and Next Steps
 
-- Took the datasets and compared the sample agianst the population
-- Found "IN--" personalities are more common in the PersonalityCafe Forum.
-- Found that INTPs post more questions per post than INFJ and INFP
+- Took the datasets and performed Exploratory Data Analysis
+- Created a data pipeline
+- Built several models and picked stochastic gradient descent due to it's high accuracy and precision
+- Built a Neural Network which improved gave great accuracy but was overfit to the over represnted classes
+- Performed emotional analysis for each personality type
 - Created Word Clouds based on the frequancy of words used by each personality type.
-- Next step would be to run our PersonalityCafe dataset through a Natural Language Processing (NLP) model and see if we can predict each personality type based on posts.
+- Next step would be to 
 
 <a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
