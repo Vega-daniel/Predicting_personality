@@ -36,7 +36,7 @@ def text_emotion(df, column):
 
     stemmer = SnowballStemmer("english")
     
-    for i,row in sentences.iterrows():
+    for i,row in newdf.iterrows():
         print(i)
         document = word_tokenize(new_df.loc[i][column])
         for word in document:
