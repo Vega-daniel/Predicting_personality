@@ -1,4 +1,4 @@
-# Personality Exploratory Data Analysis
+# Personality Predictor
 by Daniel Vega
 
 
@@ -32,7 +32,7 @@ The MBTI was constructed by Katharine Cook Briggs and her daughter Isabel Briggs
 #### Motivation:
 I find psychology very interesting, I believe the more information people have, in this case about the personality type, the easier it will be for people to understand each other. Not to mention once we understand an individual's personality, we can help create an environment where they will succeed.
 
-<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<a href="#Personality-Predictor">Back to top</a>
 
 
 # Strategy and Process
@@ -73,7 +73,7 @@ This Data set comes from "MBTI Manual" published by CPP
 | 3 | ISFP | 8.8% |
 | 4 | ESTJ | 8.7% |
 
- <a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<a href="#Personality-Predictor">Back to top</a>
 
 
 # Exploratory Data Analysis
@@ -89,7 +89,7 @@ The results were interesting, the least common personality types seemed to be mo
 
 For further EDA please look at the summary [here](ExploratoryDataAnalysis.md)
 
-<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<a href="#Personality-Predictor">Back to top</a>
 
 
 # Data Pipeline
@@ -148,7 +148,7 @@ Finally, we use the [Emotions Lexicon](http://saifmohammad.com/WebPages/NRC-Emot
 |4|17|30|15|13|23|29|43|14|15|24|
 
 
-<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<a href="#Personality-Predictor">Back to top</a>
 <!-- #endregion -->
 
 # Model Selection
@@ -165,42 +165,15 @@ We will use the following models:
 
 
 ## Random Forest Classifier
-
-    RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
-            max_depth=5, max_features='auto', max_leaf_nodes=None,
-            min_impurity_decrease=0.0, min_impurity_split=None,
-            min_samples_leaf=1, min_samples_split=2,
-            min_weight_fraction_leaf=0.0, n_estimators=1000, n_jobs=-1,
-            oob_score=True, random_state=29, verbose=0, warm_start=False)
             
     oob_score_ = 0.3614985590778098
 
 
 ## Gradient Boosting Classifier
-
-    GradientBoostingClassifier(criterion='friedman_mse', init=None,
-              learning_rate=0.01, loss='deviance', max_depth=5,
-              max_features=None, max_leaf_nodes=None,
-              min_impurity_decrease=0.0, min_impurity_split=None,
-              min_samples_leaf=1, min_samples_split=2,
-              min_weight_fraction_leaf=0.0, n_estimators=100,
-              n_iter_no_change=None, presort='auto', random_state=29,
-              subsample=1.0, tol=0.0001, validation_fraction=0.1,
-              verbose=0, warm_start=False)
               
     Accuracy_score = 0.6273530541682674
     
 #### This is pretty good, we change our max_depth to 3 and try again.
-
-    GradientBoostingClassifier(criterion='friedman_mse', init=None,
-              learning_rate=0.01, loss='deviance', max_depth=3,
-              max_features=None, max_leaf_nodes=None,
-              min_impurity_decrease=0.0, min_impurity_split=None,
-              min_samples_leaf=1, min_samples_split=2,
-              min_weight_fraction_leaf=0.0, n_estimators=100,
-              n_iter_no_change=None, presort='auto', random_state=29,
-              subsample=1.0, tol=0.0001, validation_fraction=0.1,
-              verbose=0, warm_start=False)
               
     Accuracy_score = 0.650787552823665
     
@@ -339,7 +312,7 @@ We will use the following models:
        macro avg       0.62      0.47      0.51      2603
     weighted avg       0.63      0.63      0.62      2603
     
-<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<a href="#Personality-Predictor">Back to top</a>
 
 
 # Deep Learning
@@ -392,7 +365,7 @@ We will use the following models:
      [  0   0   0   0   0   0   0   0   0   0   0   0   0   0  69   0]
      [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 108]]
 
-<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<a href="#Personality-Predictor">Back to top</a>
 
 
 # Emotional Analysis
@@ -400,7 +373,7 @@ We will use the following models:
 Next let's dive into the emotions by each personality type. The code for this can be found [here](Emotional_Analysis.ipynb).
 ![](img/emoByType.png)
 
-<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<a href="#Personality-Predictor">Back to top</a>
 
 
 # WordClouds
@@ -436,7 +409,7 @@ After transforming this image, using the pillow library and numpy, we can use it
 |ESTP|ISTP|
 |![](img/ESTP.png)|![](img/ISTP.png)|
 
-<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<a href="#Personality-Predictor">Back to top</a>
 
 
 # Conclusion and Next Steps
@@ -449,7 +422,7 @@ After transforming this image, using the pillow library and numpy, we can use it
 - Created Word Clouds based on the frequancy of words used by each personality type.
 - Next step would be to gather data from another place like twitter or facebook and see if we can predict personalities based on that text
 
-<a href="#Personality-Exploratory-Data-Analysis">Back to top</a>
+<a href="#Personality-Predictor">Back to top</a>
 
 ```python
 
