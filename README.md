@@ -160,7 +160,7 @@ We will use the following models:
 - [Random Forest](#Random-Forest-Classifier)
 - [Gradient Boosting Classifier](#Gradient-Boosting-Classifier)
 - [Naive Bayes](#Naive-Bayes)
-- [Stochastic Gradient Descent](#Stochastic-Gradient-Descent)
+- [Support Vector Machine](#Support-Vector-Machine)
 - [Logistic Regression](#Logistic-Regression)
 
 
@@ -234,7 +234,7 @@ We will use the following models:
     
 
 
-## Stochastic Gradient Descent
+## Support Vector Machine
 
 #### The accuracy here is the highest so far:
 
