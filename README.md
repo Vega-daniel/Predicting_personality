@@ -416,7 +416,7 @@ After transforming this image, using the pillow library and numpy, we can use it
 
 - Took the datasets and performed Exploratory Data Analysis
 - Created a data pipeline
-- Built several models and picked stochastic gradient descent due to it's high accuracy and precision
+- Built several models and picked support vector machine with stochastic gradient descent due to it's high accuracy and precision
 - Built a Neural Network which improved gave great accuracy but was overfit to the over represnted classes
 - Performed emotional analysis for each personality type
 - Created Word Clouds based on the frequancy of words used by each personality type.
