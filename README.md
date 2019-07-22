@@ -4,7 +4,6 @@ by Daniel Vega
 
 # Table of Contents
 - [Introduction](#Introduction)
-- [Strategy and Process](#Strategy-and-Process)
 - [Overview of the Data](#Overview-of-the-Data)
 - [Exploratory Data Analysis](#Exploratory-Data-Analysis)
 - [Data Pipeline](#Data-Pipeline)
@@ -33,15 +32,6 @@ The MBTI was constructed by Katharine Cook Briggs and her daughter Isabel Briggs
 I find psychology very interesting, I believe the more information people have, in this case about the personality type, the easier it will be for people to understand each other. Not to mention once we understand an individual's personality, we can help create an environment where they will succeed.
 
 <a href="#Personality-Predictor">Back to top</a>
-
-
-# Strategy and Process
-- Overview of the Data
-- Exploratory Data Analysis
-- Emotional Analysis
-- Model Selection
-- Visual Represantations
-
 
 # Overview of the Data
 
@@ -154,216 +144,22 @@ Finally, we use the [Emotions Lexicon](http://saifmohammad.com/WebPages/NRC-Emot
 # Model Selection
 
 
-Here we go through different machine learning algorithms in order to find a model that can predict the personalities. Random would be 1/16 or 0.0625. That is really low, so for our model let's aim to achiece results higher than 50%. The code for this can be found [here](NLP_Models.ipynb)
+Went through different machine learning algorithms in order to find a model that can predict the personalities. Random would be 1/16 or 0.0625. That is really low, so for our model let's aim to achiece results higher than 50%. The code for this can be found [here](NLP_Models.ipynb)
 
 We will use the following models:
-- [Random Forest](#Random-Forest-Classifier)
-- [Gradient Boosting Classifier](#Gradient-Boosting-Classifier)
-- [Naive Bayes](#Naive-Bayes)
-- [Support Vector Machine](#Support-Vector-Machine)
-- [Logistic Regression](#Logistic-Regression)
+- Random Forest                 - Accuracy = 0.3614985590778098
+- Gradient Boosting Classifier  - Accuracy = 0.650787552823665
+- Naive Bayes                   - Accuracy = 0.22051479062620052
+- Logistic Regression           - Accuracy = 0.6300422589320015
+- Support Vector Machine        - Accuracy = 0.6699961582789089
 
-
-## Random Forest Classifier
-            
-    oob_score_ = 0.3614985590778098
-
-
-## Gradient Boosting Classifier
-              
-    Accuracy_score = 0.6273530541682674
-    
-#### This is pretty good, we change our max_depth to 3 and try again.
-              
-    Accuracy_score = 0.650787552823665
-    
-#### Here is a summary of the results:
-
-        precision    recall  f1-score   support
-
-            ENFJ       0.52      0.28      0.37        53
-            ENFP       0.64      0.56      0.60       195
-            ENTJ       0.77      0.38      0.50        80
-            ENTP       0.71      0.53      0.61       221
-            ESFJ       0.50      0.38      0.43         8
-            ESFP       0.60      0.30      0.40        10
-            ESTJ       0.50      0.27      0.35        11
-            ESTP       0.67      0.38      0.48        32
-            INFJ       0.65      0.72      0.69       424
-            INFP       0.61      0.84      0.71       571
-            INTJ       0.65      0.59      0.62       321
-            INTP       0.68      0.74      0.71       391
-            ISFJ       0.57      0.37      0.45        57
-            ISFP       0.67      0.42      0.52        83
-            ISTJ       0.62      0.48      0.54        54
-            ISTP       0.68      0.51      0.58        92
-
-       micro avg       0.65      0.65      0.65      2603
-       macro avg       0.63      0.48      0.53      2603
-    weighted avg       0.65      0.65      0.64      2603
-
-
-## Naive Bayes
-
-#### This algorithm was not a very good choice for our data and the results show it:
-        
-            Accuracy = 0.22051479062620052
-            
-                  precision    recall  f1-score   support
-
-            ENFJ       0.00      0.00      0.00        53
-            ENFP       0.00      0.00      0.00       195
-            ENTJ       0.00      0.00      0.00        80
-            ENTP       0.00      0.00      0.00       221
-            ESFJ       0.00      0.00      0.00         8
-            ESFP       0.00      0.00      0.00        10
-            ESTJ       0.00      0.00      0.00        11
-            ESTP       0.00      0.00      0.00        32
-            INFJ       0.43      0.01      0.01       424
-            INFP       0.22      1.00      0.36       571
-            INTJ       0.00      0.00      0.00       321
-            INTP       0.00      0.00      0.00       391
-            ISFJ       0.00      0.00      0.00        57
-            ISFP       0.00      0.00      0.00        83
-            ISTJ       0.00      0.00      0.00        54
-            ISTP       0.00      0.00      0.00        92
-
-       micro avg       0.22      0.22      0.22      2603
-       macro avg       0.04      0.06      0.02      2603
-    weighted avg       0.12      0.22      0.08      2603
-    
-
-
-## Support Vector Machine
-
-#### The accuracy here is the highest so far:
-
-    Accuracy = 0.6699961582789089
-    
-                  precision    recall  f1-score   support
-
-            ENFJ       0.75      0.17      0.28        53
-            ENFP       0.66      0.60      0.63       195
-            ENTJ       0.74      0.36      0.49        80
-            ENTP       0.70      0.57      0.63       221
-            ESFJ       0.67      0.25      0.36         8
-            ESFP       0.50      0.10      0.17        10
-            ESTJ       1.00      0.09      0.17        11
-            ESTP       0.64      0.22      0.33        32
-            INFJ       0.65      0.77      0.70       424
-            INFP       0.69      0.85      0.76       571
-            INTJ       0.66      0.65      0.66       321
-            INTP       0.66      0.80      0.72       391
-            ISFJ       0.74      0.35      0.48        57
-            ISFP       0.66      0.37      0.48        83
-            ISTJ       0.76      0.30      0.43        54
-            ISTP       0.66      0.57      0.61        92
-
-       micro avg       0.67      0.67      0.67      2603
-       macro avg       0.70      0.44      0.49      2603
-    weighted avg       0.68      0.67      0.65      2603
-    
-#### Let's also look at the confusion matrix:
-
-    [[  9   5   0   3   0   0   0   0  11  16   1   4   0   0   1   3]
-     [  0 117   2   5   0   0   0   1  25  23  13   7   0   1   0   1]
-     [  2   7  29   6   0   0   0   1   4   7   9  12   1   1   0   1]
-     [  0  10   2 126   0   0   0   0  19  20  18  20   0   6   0   0]
-     [  0   0   0   0   2   0   0   0   0   1   0   4   1   0   0   0]
-     [  0   2   0   1   1   1   0   0   2   1   0   2   0   0   0   0]
-     [  0   0   0   4   0   0   1   0   1   4   1   0   0   0   0   0]
-     [  0   1   1   4   0   0   0   7   6   1   1   4   1   0   0   6]
-     [  0   6   2   8   0   0   0   0 327  51  13  15   1   0   0   1]
-     [  1   9   1  10   0   0   0   0  18 484  13  23   0   4   2   6]
-     [  0   3   1   2   0   1   0   0  37  26 208  38   1   1   1   2]
-     [  0   3   1   7   0   0   0   1  21  26  14 314   0   0   0   4]
-     [  0   4   0   0   0   0   0   0  12   6   6   8  20   1   0   0]
-     [  0   2   0   0   0   0   0   0  10  25   4   7   1  31   1   2]
-     [  0   6   0   0   0   0   0   0   5  10   8   7   1   0  16   1]
-     [  0   3   0   3   0   0   0   1   7   5   5  14   0   2   0  52]]
-
-
-## Logistic Regression
-
-#### It did not out perform stochastic gradient descent. Here is the summary:
-
-    Accuracy = 0.6300422589320015
-    
-                  precision    recall  f1-score   support
-
-            ENFJ       0.69      0.45      0.55        53
-            ENFP       0.60      0.59      0.60       195
-            ENTJ       0.72      0.42      0.54        80
-            ENTP       0.67      0.55      0.60       221
-            ESFJ       0.50      0.38      0.43         8
-            ESFP       0.50      0.10      0.17        10
-            ESTJ       0.40      0.18      0.25        11
-            ESTP       0.82      0.28      0.42        32
-            INFJ       0.60      0.70      0.65       424
-            INFP       0.66      0.78      0.71       571
-            INTJ       0.59      0.58      0.58       321
-            INTP       0.63      0.71      0.67       391
-            ISFJ       0.67      0.46      0.54        57
-            ISFP       0.55      0.37      0.45        83
-            ISTJ       0.71      0.37      0.49        54
-            ISTP       0.63      0.51      0.56        92
-
-       micro avg       0.63      0.63      0.63      2603
-       macro avg       0.62      0.47      0.51      2603
-    weighted avg       0.63      0.63      0.62      2603
-    
 <a href="#Personality-Predictor">Back to top</a>
-
 
 # Deep Learning
 
-#### Let's create a Neural Network and see if we can get better results. The code for this can be found [here](Deep_Learning.ipynb)
+#### Creating a Neural Network gives us a much higher accuracy score. The code for this can be found [here](Deep_Learning.ipynb)
 
     Accuracy = 0.9865539761813292
-    
-#### This is very impressive accuracy, let's look at the summary.
-    
-                  precision    recall  f1-score   support
-
-               0       1.00      1.00      1.00        54
-               1       1.00      1.00      1.00       214
-               2       1.00      1.00      1.00        77
-               3       1.00      1.00      1.00       186
-               4       0.00      0.00      0.00        11
-               5       0.00      0.00      0.00        15
-               6       0.00      0.00      0.00         9
-               7       1.00      1.00      1.00        21
-               8       1.00      1.00      1.00       425
-               9       0.98      1.00      0.99       538
-              10       0.96      1.00      0.98       327
-              11       0.97      1.00      0.99       408
-              12       1.00      1.00      1.00        53
-              13       1.00      1.00      1.00        88
-              14       1.00      1.00      1.00        69
-              15       1.00      1.00      1.00       108
-
-       micro avg       0.99      0.99      0.99      2603
-       macro avg       0.81      0.81      0.81      2603
-    weighted avg       0.97      0.99      0.98      2603
-    
-#### Let's also take a look at the confusion matrix:
-
-    [[ 54   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
-     [  0 214   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
-     [  0   0  77   0   0   0   0   0   0   0   0   0   0   0   0   0]
-     [  0   0   0 186   0   0   0   0   0   0   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0  11   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   9   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0  21   0   0   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0 425   0   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0 538   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0 327   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0 408   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0   0  53   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0   0   0  88   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0   0   0   0  69   0]
-     [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 108]]
 
 <a href="#Personality-Predictor">Back to top</a>
 
@@ -371,7 +167,10 @@ We will use the following models:
 # Emotional Analysis
 
 Next let's dive into the emotions by each personality type. The code for this can be found [here](Emotional_Analysis.ipynb).
-![](img/emoByType.png)
+
+|Extroverted|Introverted|
+|:---:|:---:|
+|![](img/emoENTP.png)|![](img/emoINTP.png)|
 
 <a href="#Personality-Predictor">Back to top</a>
 
@@ -386,28 +185,11 @@ Next let's dive into the emotions by each personality type. The code for this ca
 
 Let's get a bit fancy, instead of the default wordclouds, we can use a template for them, since we are talking about the mind, let's use a head.
 
-<img src="img/head2.png" alt="drawing" width="250"/>
-
-After transforming this image, using the pillow library and numpy, we can use it to produce the following wordclouds.
-
 |Extroverted|Introverted|
 |:---:|:---:|
-|ENFJ|INFJ|
-|![](img/ENFJ.png)|![](img/INFJ.png)|
-|ENFP|INFP|
-|![](img/ENFP.png)|![](img/INFP.png)|
-|ENTJ|INTJ|
-|![](img/ENTJ.png)|![](img/INTJ.png)|
 |ENTP|INTP|
 |![](img/ENTP.png)|![](img/INTP.png)|
-|ESFJ|ISFJ|
-|![](img/ESFJ.png)|![](img/ISFJ.png)|
-|ESFP|ISFP|
-|![](img/ESFP.png)|![](img/ISFP.png)|
-|ESTJ|ISTJ|
-|![](img/ESTJ.png)|![](img/ISTJ.png)|
-|ESTP|ISTP|
-|![](img/ESTP.png)|![](img/ISTP.png)|
+
 
 <a href="#Personality-Predictor">Back to top</a>
 
