@@ -1,0 +1,32 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="static/personality.css"/>
+	<title>Personality Predictor</title>
+</head>
+<body>
+	<h1>Personality Predictor!</h1>
+	<p id="intro">Feel free to test it out the model below.</p>
+	<p>
+		<li>
+			<a href="/">Home</a>
+		</li>
+		<li>
+			<a href="https://github.com/Vega-daniel/Predicting_personality">GitHub</a>
+		</li>
+	</p>
+
+  <div id="controls">
+  	<div>
+  		<label>Write a short description about your day(50 words minimum)</label>
+  		<textarea id= "text" type="text" value="enter text here" warp="hard"> </textarea><button id='inference'>Predict</button>
+  	</div>
+  	  	<div>
+  			<input id='personality' type='text' readonly/>
+  		</div>
+  </div>
+
+ 	<script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.35.2/plotly.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="/static/personality.js"></script>
+</body>
