@@ -96,47 +96,7 @@ Let's create a data pipeline, it will aim to do the following:
 
 The code to do this can be found [here](src/personality.py)
 
-We make a pickle file that creates a list of words as seen below:
-- These have been standardized, tokenized, stemmed and punctuations/stopwords have been removed
-        
-|index|type|posts|
-|:---:|:---:|:---:|
-|0|INFJ|[life-chang, experi, life, may, perc, experi, ...|
-|1|ENTP|['m, find, lack, post, alarm, sex, bore, 's, p...|
-|2|INTP|[cours, say, know, 's, bless, curs, absolut, p...|
-|3|INTJ|[dear, intp, enjoy, convers, day, esoter, gab,...|
-|4|ENTJ|[you, re, fire, 's, anoth, silli, misconcept, ...|
-
-We also make a pickle file of the strings standardized, and stemmed as seen below:
-
-|index|type|posts|
-|:---:|:---:|:---:|
-|0|INFJ|what has been the most life-chang experi in yo...|
-|1|ENTP|i 'm find the lack of me in these post veri al...|
-|2|INTP|of cours to which i say i know that 's my bles...|
-|3|INTJ|dear intp i enjoy our convers the other day es...|
-|4|ENTJ|you re fire that 's anoth silli misconcept tha...|
-
-Next we create another pickle file where the full process has been applied:
-
-|index|type|posts|
-|:---:|:---:|:---:|
-|0|INFJ|lifechang experi life may perc experi immers h...|
-|1|ENTP|im find lack post alarm sex bore posit often e...|
-|2|INTP|cours say know that bless curs absolut posit b...|
-|3|INTJ|dear intp enjoy convers day esoter gab natur u...|
-|4|ENTJ|your fire that anoth silli misconcept approach...|
-
-Finally, we use the [Emotions Lexicon](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm), which was created by the National Research Council Canada, to derive emotions from the text and store that in a pickle file. The code for this can be found [here](src/emotions.py):
-
-|emotion|anger|anticipation|disgust|fear|joy|negative|positive|sadness|surprise|trust|
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-|0|3|22|2|3|11|14|22|4|6|13|
-|1|14|23|8|15|21|24|37|12|17|18|
-|2|7|26|5|12|26|17|42|9|13|31|
-|3|6|14|4|7|6|14|30|7|2|20|
-|4|17|30|15|13|23|29|43|14|15|24|
-
+![](img/Pipeline.png)
 
 <a href="#Personality-Predictor">Back to top</a>
 <!-- #endregion -->
