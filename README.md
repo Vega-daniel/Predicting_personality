@@ -167,6 +167,7 @@ We will use the following models:
 # Emotional Analysis
 
 Next let's dive into the emotions by each personality type. The code for this can be found [here](Emotional_Analysis.ipynb).
+
 |Extroverted|Introverted|
 |:---:|:---:|
 |![](img/emoENTP.png)|![](img/emoINTP.png)|
