@@ -157,53 +157,9 @@ We will use the following models:
 
 # Deep Learning
 
-#### Let's create a Neural Network and see if we can get better results. The code for this can be found [here](Deep_Learning.ipynb)
+#### Creating a Neural Network gives us a much higher accuracy score. The code for this can be found [here](Deep_Learning.ipynb)
 
     Accuracy = 0.9865539761813292
-    
-#### This is very impressive accuracy, let's look at the summary.
-    
-                  precision    recall  f1-score   support
-
-               0       1.00      1.00      1.00        54
-               1       1.00      1.00      1.00       214
-               2       1.00      1.00      1.00        77
-               3       1.00      1.00      1.00       186
-               4       0.00      0.00      0.00        11
-               5       0.00      0.00      0.00        15
-               6       0.00      0.00      0.00         9
-               7       1.00      1.00      1.00        21
-               8       1.00      1.00      1.00       425
-               9       0.98      1.00      0.99       538
-              10       0.96      1.00      0.98       327
-              11       0.97      1.00      0.99       408
-              12       1.00      1.00      1.00        53
-              13       1.00      1.00      1.00        88
-              14       1.00      1.00      1.00        69
-              15       1.00      1.00      1.00       108
-
-       micro avg       0.99      0.99      0.99      2603
-       macro avg       0.81      0.81      0.81      2603
-    weighted avg       0.97      0.99      0.98      2603
-    
-#### Let's also take a look at the confusion matrix:
-
-    [[ 54   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
-     [  0 214   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
-     [  0   0  77   0   0   0   0   0   0   0   0   0   0   0   0   0]
-     [  0   0   0 186   0   0   0   0   0   0   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0  11   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0  15   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   9   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0  21   0   0   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0 425   0   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0 538   0   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0 327   0   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0 408   0   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0   0  53   0   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0   0   0  88   0   0]
-     [  0   0   0   0   0   0   0   0   0   0   0   0   0   0  69   0]
-     [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 108]]
 
 <a href="#Personality-Predictor">Back to top</a>
 
@@ -211,7 +167,9 @@ We will use the following models:
 # Emotional Analysis
 
 Next let's dive into the emotions by each personality type. The code for this can be found [here](Emotional_Analysis.ipynb).
-![](img/emoByType.png)
+|Extroverted|Introverted|
+|:---:|:---:|
+|![](img/emoENTP.png)|![](img/emoINTP.png)|
 
 <a href="#Personality-Predictor">Back to top</a>
 
@@ -225,13 +183,6 @@ Next let's dive into the emotions by each personality type. The code for this ca
 - Removed the words in that list from our dataset
 
 Let's get a bit fancy, instead of the default wordclouds, we can use a template for them, since we are talking about the mind, let's use a head.
-
-|Extroverted|Introverted|
-|:---:|:---:|
-|ENTP|INTP|
-|![](img/emoENTP.png)|![](img/emoINTP.png)|
-
-After transforming this image, using the pillow library and numpy, we can use it to produce the following wordclouds.
 
 |Extroverted|Introverted|
 |:---:|:---:|
