@@ -69,13 +69,11 @@ This Data set comes from "MBTI Manual" published by CPP
 # Exploratory Data Analysis
 
 
-First let's take a look at how much each personality type was represented in the data set in comparison to the population. 
+Performing EDA on our data set revealed a few things. They are summarized by the graphs below:
 
-![](img/samplebarvpop.png)
-
-The results were interesting, the least common personality types seemed to be most represnted in the dataset. In order to compare apples to apples, let's convert our sample count to a percentage and plot them side by side.
-
-![](img/samplevpop.png)
+|Data Unbalanced|Questions per post|Links per post|Words per post|
+|:---:|:---:|:---:|:---:|
+|![](img/unbalanced.png)|![](img/questionspp.png)|![](img/linkspp.png)|![](img/wordspp.png)|
 
 For further EDA please look at the summary [here](ExploratoryDataAnalysis.md)
 
