@@ -71,9 +71,13 @@ This Data set comes from "MBTI Manual" published by CPP
 
 Performing EDA on our data set revealed a few things. They are summarized by the graphs below:
 
-|Data Unbalanced|Questions per post|Links per post|Words per post|
-|:---:|:---:|:---:|:---:|
-|![](img/unbalanced.png)|![](img/questionspp.png)|![](img/linkspp.png)|![](img/wordspp.png)|
+|Data Unbalanced|Questions per post|
+|:---:|:---:|
+|![](img/unbalanced.png)|![](img/questionspp.png)|
+
+|Links per post|Words per post|
+|:---:|:---:|
+|![](img/linkspp.png)|![](img/wordspp.png)|
 
 For further EDA please look at the summary [here](ExploratoryDataAnalysis.md)
 
