@@ -11,6 +11,9 @@ from bs4 import BeautifulSoup
 symbols = string.punctuation
 numbers = '0123456789'
 stopwords_ = set(stopwords.words('english'))
+more = ['like','think','infj','feel','know','one','think','realli','thing','get','entp','intp','intj','would','entj','enfj','isfp','feel','istp','infp','enfp','esfj','estj','esfp','estp','istj','isfj','type','becaus','peopl','time']
+for w in more:
+    stopwords_.append(w)
 
 def remove_accents(string):
     nfkd_form = unicodedata.normalize('NFKD', string)
